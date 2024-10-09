@@ -28,8 +28,8 @@ const PopconfirmDelete = ({ onConfirm, onCancel, id, title }: ConfirmType) => {
     return (
         <>
             <Tooltip title="delete">
-                <Button danger onClick={showDeleteModal}>
-                    <DeleteOutlined className='text-orange-500' />
+                <Button  onClick={showDeleteModal}>
+                    <DeleteOutlined className='text-orange-500 text-[18px]' />
                 </Button>
             </Tooltip>
 

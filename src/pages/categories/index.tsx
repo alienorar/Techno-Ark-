@@ -2,11 +2,12 @@ import { useEffect, useState } from "react";
 import { Button, Space, Tooltip } from 'antd';
 import { EditOutlined, EnterOutlined } from '@ant-design/icons';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { GlobalTable, GlobalSearch } from '@components';
+import { GlobalTable, GlobalSearch,} from '@components';
 import { Category } from '@modals';
 import { category } from '@service';
-import { DeleteType, ParamsType } from "@types";
+import { ParamsType } from "@types";
 import { ConfirmDelete } from '@confirmation';
+import { openNotification } from "@utils";
 
 
 const Index = () => {
@@ -99,16 +100,18 @@ const Index = () => {
 
   // ======== delete Data ========= 
 
-  const deleteData = async (id: DeleteType) => {
+  const deleteData = async (id: number | undefined) => {
+    console.log(id)
     const res: any = await category.delete(id);
     if (res.status === 200) {
       getData();
-      // notify("Category succesfully deleted");
+      openNotification('success',"Success", res.data?.message,)
+ 
     }
   };
 
   // ========== single page ===========
-  const handleView = (id: number) => {
+  const handleView = (id: number | undefined) => {
     navigate(`/admin-panel/categories/${id}`);
   }
 
@@ -134,7 +137,7 @@ const Index = () => {
       key: 'action',
       render: (record: any) => (
         <Space size="middle">
-          <Tooltip title="edit"><Button onClick={() => editData(record)}><EditOutlined /></Button></Tooltip>
+          <Tooltip title="edit"><Button onClick={() => editData(record)}><EditOutlined className="text-[18px]" /></Button></Tooltip>
           <ConfirmDelete
             id={record.id}
             onConfirm={deleteData}
@@ -142,7 +145,7 @@ const Index = () => {
             title={"Delete this Brands ?"}
           />
           <Tooltip title="view">
-            <Button onClick={() => handleView(record.id.toString())}><EnterOutlined /></Button>
+            <Button onClick={() => handleView(record.id.toString())}><EnterOutlined className="text-[18px]" /></Button>
           </Tooltip>
         </Space>
       ),

@@ -1,7 +1,6 @@
+// import React, { ReactNode } from "react";
+
 // ============ Auth ============
-
-import React, { ReactNode } from "react";
-
 interface SignIn {
     phone_number: string,
     password: string,
@@ -13,14 +12,13 @@ interface SignUp extends SignIn {
 }
 
 export interface AuthType {
-    [x: string]: any
+    // [x: string]: any
     sign_in: (data: SignIn) => Promise<any>,
     sign_up: (data: SignUp) => Promise<any>
 
 }
 
 // ============ Globals ============
-
 export interface ParamsType {
     limit: number,
     search: string,
@@ -32,11 +30,13 @@ export interface ModalProps {
     open: boolean,
     handleClose: () => void,
     update: any,
+    onOk?:()=> void,
+    getData?:()=>void,
+    categories?:any
 
 }
 
 // ============ Create  ============
-
 export interface CreateType {
     name: string,
 }
@@ -51,8 +51,17 @@ export interface DeleteType {
     id: number,
 }
 
-// ============ Category ============
+// ============Notification=============
+export type NotificationType = 'success' | 'info' | 'warning' | 'error';
 
+
+// ============Global Search=============
+export interface SearchType {
+    updateParams: (params: ParamsType) => void; 
+    placeholder?: string;
+}
+
+// ============ Category ===========
 export interface CategoryModal extends ModalProps {
     onOk: () => void,
     getData: () => void,
@@ -60,21 +69,38 @@ export interface CategoryModal extends ModalProps {
 
 export interface CategoryType {
     create: (data: CreateType) => Promise<any>,
-    get: (params: ParamsType) => Promise<any>,
+    get: (params?: ParamsType) => Promise<any>,
     update: (id: UpdateType["id"], data: UpdateType["data"]) => Promise<any>,
-    delete: (id: DeleteType) => Promise<number>
+    delete: (id: number | undefined) => Promise<number>
 }
 
 export interface ConfirmType {
-    onConfirm: (id?: number, deleteData?: any) => void;
+    onConfirm: (id: number) => void;
     onCancel: () => void,
     id: number,
     title: string
 }
 
-export interface ModalPropstype {
-    open: boolean;
-    setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-    children: ReactNode;
-    sx?: React.CSSProperties
+// export interface ModalPropstype {
+//     open: boolean;
+//     setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+//     children: ReactNode;
+//     sx?: React.CSSProperties
+// }
+
+
+// ============Sub Category=============
+export interface SubCreate{
+    name:string,
+    parent_category_id?:number,
 }
+
+
+export interface SubCategoryType{
+    create: (data:SubCreate) => Promise<any>,
+    get: (parent_category_id:number) => Promise<any>,
+    update: (id: UpdateType["id"], data: UpdateType["data"]) => Promise<any>,
+    delete: (id: number | undefined) => Promise<number>
+}
+
+

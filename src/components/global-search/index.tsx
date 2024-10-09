@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import { Input } from 'antd';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { SearchType } from '@types';
 
-const SearchInput = ({ updateParams, placeholder }) => {
+const SearchInput = ({ updateParams, placeholder }: SearchType) => {
     const [searchValue, setSearchValue] = useState('');
     const navigate = useNavigate();
     const { search } = useLocation();
@@ -15,10 +16,16 @@ const SearchInput = ({ updateParams, placeholder }) => {
 
     const handleSearchChange = (event: any) => {
         const newSearchValue = event.target.value;
+        console.log(newSearchValue);
+
         setSearchValue(newSearchValue);
-
-
-        updateParams({ search: newSearchValue });
+        if (updateParams) {
+            updateParams({
+                search: newSearchValue,
+                limit: newSearchValue,
+                page: newSearchValue
+            });
+        }
         const searchParams = new URLSearchParams(search);
         searchParams.set("search", newSearchValue);
         navigate(`?${searchParams}`);
@@ -28,7 +35,7 @@ const SearchInput = ({ updateParams, placeholder }) => {
         <Input
             placeholder={placeholder}
             size="large"
-            style={{ maxWidth: 260, minWidth: 20, height: 40, padding: 2 }}
+            style={{ maxWidth: 260, minWidth: 20, height: 40, paddingLeft: 10 }}
             onChange={handleSearchChange}
             value={searchValue}
         />

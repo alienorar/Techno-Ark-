@@ -1,4 +1,4 @@
-import   { useState } from 'react';
+import { useState } from 'react';
 import {
     MenuFoldOutlined,
     MenuUnfoldOutlined,
@@ -114,7 +114,7 @@ const App = () => {
                 okText="Logout"
                 cancelText="Cancel"
                 okButtonProps={{
-                    style: { backgroundColor: 'orangered', borderColor: 'orangered', color: '#fff' }, // Custom color for the Logout button
+                    style: { backgroundColor: 'orangered', borderColor: 'orangered', color: '#fff', marginLeft: 10, padding: 4 },
                 }}
             >
                 <p>Are you sure you want to log out?</p>

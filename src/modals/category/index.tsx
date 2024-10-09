@@ -28,7 +28,6 @@ const CategoriesModal = ({ open, onOk, handleClose, update, getData }: CategoryM
             } else {
                 const res = await category.create(values);
                 if (res.status === 201) {
-
                     getData()
                     handleClose()
                 }

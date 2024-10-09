@@ -13,6 +13,7 @@
       "@components":["./src/components"],
       "@modals":["./src/modals"],
       "@confirmation":["./src/confirmation"],
+      "@utils":["./src/utils"],
     },
 
     /* Bundler mode */
