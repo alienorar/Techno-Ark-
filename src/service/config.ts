@@ -5,9 +5,9 @@ const https = axios.create({
 })
 
 https.interceptors.request.use((config) => {
-    const acces_token = localStorage.getItem("access_token")
-    if (acces_token) {
-        config.headers['Authorization'] = `Bearer ${acces_token}`
+    const access_token = localStorage.getItem("access_token")
+    if (access_token) {
+        config.headers['Authorization'] = `Bearer ${access_token}`
     }
     return config
 })
