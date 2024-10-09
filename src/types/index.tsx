@@ -103,4 +103,9 @@ export interface SubCategoryType{
     delete: (id: number | undefined) => Promise<number>
 }
 
-
+export interface TablePropsType{
+columns:any,
+data:any,
+pagination:any,
+handleChange:any,
+}
