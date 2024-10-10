@@ -1,7 +1,7 @@
 
 import { Modal, Form, Input, Button } from 'antd';
 import { useEffect } from 'react';
-import { CategoryModal, } from '@types';
+import { CategoryModal, CategoryUpdate, } from '@types';
 import { category } from '@service';
 
 const CategoriesModal = ({ open, onOk, handleClose, update, getData }: CategoryModal) => {
@@ -16,7 +16,7 @@ const CategoriesModal = ({ open, onOk, handleClose, update, getData }: CategoryM
         }
     })
 
-    const onFinish = async (values: any) => {
+    const onFinish = async (values:CategoryUpdate) => {
         try {
             if (update?.id) {
                 const res = await category.update(update.id, values);

@@ -65,7 +65,7 @@ export interface SearchType {
 // ============ Category ===========
 export interface CategoryUpdate {
     name:string,
-    id:number,
+    id?:number,
 }
 export interface CategoryModal extends CategoryModalProps {
     onOk: () => void,
@@ -94,7 +94,7 @@ export interface CategoryModalProps  extends GlobalModalProps{
 
 // ============Sub Category=============
 export interface SubCreate {
-    name: string,
+    name?: string,
     parent_category_id?: number,
     id?:number
 }
