@@ -1,5 +1,9 @@
 // import React, { ReactNode } from "react";
 
+import { AnyObject } from "antd/es/_util/type";
+import { TablePaginationConfig, ColumnsType } from "antd/es/table";
+
+
 // ============ Auth ============
 interface SignIn {
     phone_number: string,
@@ -12,7 +16,6 @@ interface SignUp extends SignIn {
 }
 
 export interface AuthType {
-    // [x: string]: any
     sign_in: (data: SignIn) => Promise<any>,
     sign_up: (data: SignUp) => Promise<any>
 
@@ -23,16 +26,6 @@ export interface ParamsType {
     limit: number,
     search: string,
     page: number,
-
-}
-
-export interface ModalProps {
-    open: boolean,
-    handleClose: () => void,
-    update: any,
-    onOk?:()=> void,
-    getData?:()=>void,
-    categories?:any
 
 }
 
@@ -57,12 +50,12 @@ export type NotificationType = 'success' | 'info' | 'warning' | 'error';
 
 // ============Global Search=============
 export interface SearchType {
-    updateParams: (params: ParamsType) => void; 
+    updateParams: (params: ParamsType) => void;
     placeholder?: string;
 }
 
 // ============ Category ===========
-export interface CategoryModal extends ModalProps {
+export interface CategoryModal extends CategoryModalProps {
     onOk: () => void,
     getData: () => void,
 }
@@ -88,24 +81,52 @@ export interface ConfirmType {
 //     sx?: React.CSSProperties
 // }
 
+export interface CategoryModalProps {
+    open: boolean,
+    handleClose: () => void,
+    update: any,
+    onOk?: () => void,
+    getData?: () => void,
+    categories?: any
+
+}
 
 // ============Sub Category=============
-export interface SubCreate{
-    name:string,
-    parent_category_id?:number,
+export interface SubCreate {
+    name: string,
+    parent_category_id?: number,
 }
 
 
-export interface SubCategoryType{
-    create: (data:SubCreate) => Promise<any>,
-    get: (parent_category_id:number) => Promise<any>,
+export interface SubCategoryType {
+    create: (data: SubCreate) => Promise<any>,
+    get: (parent_category_id: number) => Promise<any>,
     update: (id: UpdateType["id"], data: UpdateType["data"]) => Promise<any>,
     delete: (id: number | undefined) => Promise<number>
 }
 
-export interface TablePropsType{
-columns:any,
-data:any,
-pagination:any,
-handleChange:any,
+export interface TablePropsType {
+    columns:ColumnsType<AnyObject>,
+    data: AnyObject[] | undefined,
+    pagination: false | TablePaginationConfig | undefined,
+    handleChange: (pagination: TablePaginationConfig) => void,
 }
+
+
+// ============ Brand=============
+
+export interface BrandCreate {
+    name: string,
+    categoryId: number,
+    description: string
+
+}
+
+export interface BrandType {
+    create: (data: BrandCreate) => Promise<any>,
+    get: (params: ParamsType) => Promise<any>,
+    update: (id: UpdateType["id"], data: UpdateType["data"]) => Promise<any>,
+    delete: (id: number) => Promise<number>,
+    getBrands: (id: number) => Promise<number>
+}
+

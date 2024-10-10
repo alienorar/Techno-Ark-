@@ -1,15 +1,16 @@
-import SignIn from './sign-in'
-import SignUp from './sign-up'
-import AdminPanel from './admin-panel'
-import Products from './products'
-import Categories from './categories'
-import Brands from './brands'
-import SubCategories from './sub-categories'
-import BrandCategories from './brand-categories'
-import Ads from './ads'
-import Stock from './stock'
-import Settings from './settings'
-import NotFound from './not-found'
+import { lazy } from 'react';
+const  SignIn  = lazy(() => import('./sign-in'));
+const SignUp = lazy(() => import('./sign-up'));
+const AdminPanel = lazy(() => import('./admin-panel'));
+const Products = lazy(() => import('./products'));
+const Categories = lazy(() => import('./categories'));
+const Brands = lazy(() => import('./brands'));
+const SubCategories = lazy(() => import('./sub-categories'));
+const BrandCategories = lazy(() => import('./brand-categories'));
+const Ads = lazy(() => import('./ads'));
+const Stock = lazy(() => import('./stock'));
+const Settings = lazy(() => import('./settings'));
+const NotFound = lazy(() => import('./not-found'));
 
 export{
     SignIn,

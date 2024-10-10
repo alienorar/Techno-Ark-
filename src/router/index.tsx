@@ -19,11 +19,11 @@ import {
     NotFound,
     Settings,
 } from '@pages';
+import { Suspense } from "react";
 
 const Index = () => {
     const router = createBrowserRouter(
         createRoutesFromElements(
-
             <Route>
                 <Route path="/" element={<App />}>
                     <Route path="/" element={<SignUp />} />
@@ -44,6 +44,9 @@ const Index = () => {
             </Route>
         )
     )
-    return <RouterProvider router={router} />;
+    return <Suspense fallback={<div className="w-full h-[80vh] flex justify-center items-center m-auto"><p className="text-orange-400 text-[24px]">Loading...</p> <div className="loader"></div></div>}>
+        <RouterProvider router={router} />
+    </Suspense>;
 }
 export default Index;
+

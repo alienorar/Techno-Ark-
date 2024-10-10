@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Button, Space, Tooltip } from 'antd';
 import { EditOutlined, } from '@ant-design/icons';
 import { useNavigate, NavLink, useParams, useLocation } from 'react-router-dom'
-import { GlobalTable,GlobalSearch } from '@components';
+import { GlobalTable, GlobalSearch } from '@components';
 import { ConfirmDelete } from "@confirmation";
 import { SubCategory } from '@modals'
 import { subCategory, category } from '@service';
@@ -10,7 +10,7 @@ import { ParamsType } from "@types";
 
 
 const Index = () => {
-  const {id} = useParams();
+  const { id } = useParams();
   const parent_category_id = Number(id)
   const [data, setData] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -40,7 +40,7 @@ const Index = () => {
     }))
   }, [search])
 
- 
+
 
   // ============ Table ==============
   const handleTableChange = (pagination: any) => {
@@ -75,7 +75,7 @@ const Index = () => {
     setIsModalOpen(false);
     setUpdate({})
   };
-  
+
   // ============ get Data ============
   const getData = async () => {
     try {
@@ -94,7 +94,7 @@ const Index = () => {
   }, [parent_category_id]);
 
   // =========== edit Data ===========
-  const editData = (item:any) => {
+  const editData = (item: any) => {
     setUpdate(item);
     showModal()
 
@@ -103,8 +103,8 @@ const Index = () => {
 
 
   // ======== delete Data ========= 
-  const deleteData = async (id:number|undefined) => {
-    const res:any = await subCategory.delete(id);
+  const deleteData = async (id: number | undefined) => {
+    const res: any = await subCategory.delete(id);
     if (res.status === 200) {
       getData();
     }
@@ -140,14 +140,14 @@ const Index = () => {
     {
       title: 'Date',
       dataIndex: 'createdAt',
-      render: (date:string) => new Date(date).toLocaleDateString('en-GB').replace(/\//g, '.')
+      render: (date: string) => new Date(date).toLocaleDateString('en-GB').replace(/\//g, '.')
     },
     {
       title: 'Action',
       key: 'action',
-      render: (record:any) => (
+      render: (record: any) => (
         <Space size="middle">
-          <Tooltip title="edit"><Button onClick={() => editData(record)}><EditOutlined /></Button></Tooltip>
+          <Tooltip title="edit"><Button onClick={() => editData(record)}><EditOutlined className="text-[18px]" /></Button></Tooltip>
           <ConfirmDelete
             id={record.id}
             onConfirm={deleteData}
@@ -172,7 +172,7 @@ const Index = () => {
       <div className="flex items-center justify-between py-4">
         <GlobalSearch updateParams={updateParams} placeholder={"Search Categories"} />
         <div className="flex gap-2 items-center ">
-          <Button type="primary" size="large" style={{ maxWidth: 160, minWidth: 20, backgroundColor: "orangered" }} onClick={showModal}>
+          <Button type="primary" size="large" style={{ maxWidth: 160, minWidth: 80, backgroundColor: "orangered", color: "white", height: 40 }} onClick={showModal}>
             Create
           </Button>
 
