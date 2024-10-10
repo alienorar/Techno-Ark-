@@ -1,10 +1,10 @@
 import { Modal, Form, Input, Button, Select } from 'antd';
 import { useEffect, useState } from 'react';
 import { brand } from '@service';
-import {CategoryModalProps} from '@types';
+import { BrandCreate, BrandModalProps,} from '@types';
 const { Option } = Select;
 
-const Index = ({ open, onOk, handleClose, update, getData, categories, }: CategoryModalProps) => {
+const Index = ({ open, onOk, handleClose, update, getData, categories, }: BrandModalProps) => {
     const [form] = Form.useForm();
 
     useEffect(() => {
@@ -12,7 +12,7 @@ const Index = ({ open, onOk, handleClose, update, getData, categories, }: Catego
             form.setFieldsValue({
                 name: update?.name,
                 description: update?.description,
-                categoryId: parseInt(update?.category_id)
+                categoryId: update?.category_id
             });
         } else {
             form.resetFields();
@@ -27,13 +27,13 @@ const Index = ({ open, onOk, handleClose, update, getData, categories, }: Catego
 
 
     const onFinish = async (value: any) => {
-        const demo = {
+        const demo:BrandCreate = {
             name: value?.name,
             description: value?.description,
             categoryId: parseInt(value?.category_id)
         }
 
-        let formData: any = new FormData();
+        let formData:any = new FormData();
         formData.append("name", value?.name);
         formData.append("categoryId", value?.category_id);
         formData.append("description", value?.description);
@@ -47,9 +47,7 @@ const Index = ({ open, onOk, handleClose, update, getData, categories, }: Catego
                     if (getData) {
                         getData()
                     }
-
                 }
-
             } else {
                 const res = await brand.create(formData);
                 if (res.status === 201) {

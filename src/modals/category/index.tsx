@@ -21,7 +21,6 @@ const CategoriesModal = ({ open, onOk, handleClose, update, getData }: CategoryM
             if (update?.id) {
                 const res = await category.update(update.id, values);
                 if (res.status === 200) {
-
                     handleClose()
                     getData()
                 }

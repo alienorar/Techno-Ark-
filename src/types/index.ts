@@ -29,6 +29,14 @@ export interface ParamsType {
 
 }
 
+export interface GlobalModalProps{
+     open?: boolean,
+    handleClose: () => void,
+    onOk?: () => void,
+    getData?: () => void, 
+}
+
+
 // ============ Create  ============
 export interface CreateType {
     name: string,
@@ -55,6 +63,10 @@ export interface SearchType {
 }
 
 // ============ Category ===========
+export interface CategoryUpdate {
+    name:string,
+    id:number,
+}
 export interface CategoryModal extends CategoryModalProps {
     onOk: () => void,
     getData: () => void,
@@ -74,20 +86,9 @@ export interface ConfirmType {
     title: string
 }
 
-// export interface ModalPropstype {
-//     open: boolean;
-//     setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-//     children: ReactNode;
-//     sx?: React.CSSProperties
-// }
-
-export interface CategoryModalProps {
-    open: boolean,
-    handleClose: () => void,
-    update: any,
-    onOk?: () => void,
-    getData?: () => void,
-    categories?: any
+export interface CategoryModalProps  extends GlobalModalProps{
+    update?:CategoryUpdate,
+    categories?: any[]
 
 }
 
@@ -114,19 +115,44 @@ export interface TablePropsType {
 
 
 // ============ Brand=============
-
 export interface BrandCreate {
-    name: string,
-    categoryId: number,
-    description: string
+ categoryId?:number, 
+createdAt?:string,
+description?:string,
+id?:number,
+image?:any,
+lastUpdateAt?:string,
+name?:string
+}
 
+export interface BrandUpdate {
+category_id?:string, 
+createdAt?:string,
+description?:string,
+id?:number,
+// image?:any,
+lastUpdateAt?:string,
+name?:string
 }
 
 export interface BrandType {
     create: (data: BrandCreate) => Promise<any>,
     get: (params: ParamsType) => Promise<any>,
-    update: (id: UpdateType["id"], data: UpdateType["data"]) => Promise<any>,
+    update: (id:number, data:BrandUpdate) => Promise<any>,
     delete: (id: number) => Promise<number>,
     getBrands: (id: number) => Promise<number>
 }
 
+export interface BrandModalProps extends GlobalModalProps{
+    update:BrandUpdate,
+    categories?:any[],
+
+}
+
+
+// export interface ModalPropstype {
+//     open: boolean;
+//     setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+//     children: ReactNode;
+//     sx?: React.CSSProperties
+// }
