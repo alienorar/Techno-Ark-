@@ -64,7 +64,7 @@ export interface SearchType {
 
 // ============ Category ===========
 export interface CategoryUpdate {
-    name:string,
+    name?:string,
     id?:number,
 }
 export interface CategoryModal extends CategoryModalProps {
@@ -73,7 +73,7 @@ export interface CategoryModal extends CategoryModalProps {
 }
 
 export interface CategoryType {
-    create: (data: CreateType) => Promise<any>,
+    create: (data: CategoryUpdate) => Promise<any>,
     get: (params?: ParamsType) => Promise<any>,
     update: (id: UpdateType["id"], data: UpdateType["data"]) => Promise<any>,
     delete: (id: number | undefined) => Promise<number>
