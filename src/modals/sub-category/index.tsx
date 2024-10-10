@@ -1,16 +1,16 @@
 import { Modal, Form, Input, Button, Select } from 'antd';
 import { useEffect } from 'react';
 import { subCategory } from '@service';
-import { ModalProps } from '@types';
+import { SubModalprops } from '@types';
 const { Option } = Select;
 
-const Index = ({ open, onOk, handleClose, update, getData, categories, }: ModalProps) => {
+const Index = ({ open, onOk, handleClose, update, getData, categories, }:SubModalprops ) => {
     const [form] = Form.useForm();
     useEffect(() => {
         if (update) {
             form.setFieldsValue({
                 name: update?.name || "",
-                parent_category_id: parseInt(update?.parent_category_id) || "",
+                parent_category_id: update?.parent_category_id || null,
 
             })
         } else {

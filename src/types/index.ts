@@ -96,8 +96,13 @@ export interface CategoryModalProps  extends GlobalModalProps{
 export interface SubCreate {
     name: string,
     parent_category_id?: number,
+    id?:number
 }
 
+export interface SubModalprops extends GlobalModalProps{
+update:SubCreate,
+categories:any[]
+}
 
 export interface SubCategoryType {
     create: (data: SubCreate) => Promise<any>,
