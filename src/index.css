@@ -8,39 +8,6 @@
 @tailwind components;
 @tailwind utilities;
 
-.custom-form-item label {
-  margin-bottom: 2px;
-}
-
-.ant-menu-item-selected {
-  background-color: #e35112 !important
-}
-
-/* custom-popconfirm.css */
-.custom-popconfirm .ant-popover-inner {
-  background-color: #f0f0f0;
-  /* Change background color */
-  border-radius: 10px;
-  /* Add rounded corners */
-}
-
-.custom-popconfirm .ant-popover-inner-content {
-  font-size: 14px;
-  /* Change font size */
-  color: #333;
-  /* Text color */
-}
-
-.custom-popconfirm .ant-popover-buttons {
-  justify-content: center;
-  /* Center the buttons */
-}
-
-.custom-popconfirm .ant-btn-primary {
-  background-color: #ff4d4f;
-  /* Customize primary button color */
-}
-
 /* HTML: <div class="loader"></div> */
 .loader {
   width: 50px;

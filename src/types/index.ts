@@ -29,11 +29,11 @@ export interface ParamsType {
 
 }
 
-export interface GlobalModalProps{
-     open?: boolean,
+export interface GlobalModalProps {
+    open?: boolean,
     handleClose: () => void,
     onOk?: () => void,
-    getData?: () => void, 
+    getData?: () => void,
 }
 
 
@@ -64,8 +64,8 @@ export interface SearchType {
 
 // ============ Category ===========
 export interface CategoryUpdate {
-    name?:string,
-    id?:number,
+    name?: string,
+    id?: number,
 }
 export interface CategoryModal extends CategoryModalProps {
     onOk: () => void,
@@ -82,12 +82,12 @@ export interface CategoryType {
 export interface ConfirmType {
     onConfirm: (id: number) => void;
     onCancel: () => void,
-    id: number,
+    id: number | undefined,
     title: string
 }
 
-export interface CategoryModalProps  extends GlobalModalProps{
-    update?:CategoryUpdate,
+export interface CategoryModalProps extends GlobalModalProps {
+    update?: CategoryUpdate,
     categories?: any[]
 
 }
@@ -96,12 +96,12 @@ export interface CategoryModalProps  extends GlobalModalProps{
 export interface SubCreate {
     name?: string,
     parent_category_id?: number,
-    id?:number
+    id?: number
 }
 
-export interface SubModalprops extends GlobalModalProps{
-update:SubCreate,
-categories:any[]
+export interface SubModalprops extends GlobalModalProps {
+    update: SubCreate,
+    categories: any[]
 }
 
 export interface SubCategoryType {
@@ -112,7 +112,7 @@ export interface SubCategoryType {
 }
 
 export interface TablePropsType {
-    columns:ColumnsType<AnyObject>,
+    columns: ColumnsType<AnyObject>,
     data: AnyObject[] | undefined,
     pagination: false | TablePaginationConfig | undefined,
     handleChange: (pagination: TablePaginationConfig) => void,
@@ -121,39 +121,60 @@ export interface TablePropsType {
 
 // ============ Brand=============
 export interface BrandCreate {
- categoryId?:number, 
-createdAt?:string,
-description?:string,
-id?:number,
-image?:any,
-lastUpdateAt?:string,
-name?:string
+    categoryId?: number,
+    createdAt?: string,
+    description?: string,
+    id?: number,
+    image?: any,
+    lastUpdateAt?: string,
+    name?: string
 }
 
 export interface BrandUpdate {
-category_id?:string, 
-createdAt?:string,
-description?:string,
-id?:number,
-// image?:any,
-lastUpdateAt?:string,
-name?:string
+    category_id?: string,
+    createdAt?: string,
+    description?: string,
+    id?: number,
+    lastUpdateAt?: string,
+    name?: string
 }
 
 export interface BrandType {
     create: (data: BrandCreate) => Promise<any>,
     get: (params: ParamsType) => Promise<any>,
-    update: (id:number, data:BrandUpdate) => Promise<any>,
+    update: (id: number, data: BrandUpdate) => Promise<any>,
     delete: (id: number) => Promise<number>,
     getBrands: (id: number) => Promise<number>
 }
 
-export interface BrandModalProps extends GlobalModalProps{
-    update:BrandUpdate,
-    categories?:any[],
+export interface BrandModalProps extends GlobalModalProps {
+    update: BrandUpdate,
+    categories?: any[],
 
 }
 
+
+// ============ Brand Categories=============
+export interface BrandCategoryCreate {
+    name?: string,
+    brand_id?: number,
+    id?:number,
+}
+
+export interface BrandCategoryType {
+    create: (data: BrandCategoryCreate) => Promise<any>,
+    get: (params: ParamsType) => Promise<any>,
+    update: (id: number, data: BrandCategoryCreate) => Promise<any>,
+    delete: (id: number) => Promise<number>,
+    getBrandCat: (id: number) => Promise<number>,
+    getBrands:()=>Promise<any>
+}
+
+
+export interface BrandCategoryModal extends GlobalModalProps {
+update?:BrandCategoryCreate,
+parentBrand:AnyObject,
+}
 
 // export interface ModalPropstype {
 //     open: boolean;
@@ -161,3 +182,7 @@ export interface BrandModalProps extends GlobalModalProps{
 //     children: ReactNode;
 //     sx?: React.CSSProperties
 // }
+
+
+
+

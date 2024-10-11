@@ -1,45 +1,41 @@
+
 import { Modal, Form, Input, Button, Select } from 'antd';
 import { useEffect } from 'react';
-import { subCategory } from '@service';
-import { SubModalprops } from '@types';
+import { brandCategory } from '@service';
+import { BrandCategoryCreate, BrandCategoryModal,} from '@types';
 const { Option } = Select;
 
-const Index = ({ open, onOk, handleClose, update, getData, categories, }:SubModalprops ) => {
+const Index = ({ open, onOk, handleClose, update, getData, parentBrand,}:BrandCategoryModal) => {
     const [form] = Form.useForm();
     useEffect(() => {
         if (update) {
             form.setFieldsValue({
-                name: update?.name,
-                parent_category_id: Number(update?.parent_category_id),
-
+                name: update?.name || "",
+                brand_id: update?.brand_id,
             })
         } else {
             form.resetFields()
         }
     });
 
-    const onFinish = async (values: any) => {
+    const onFinish = async (values:BrandCategoryCreate) => {
         try {
             if (update?.id) {
-                const res = await subCategory.update(update.id, values);
+                const res = await brandCategory.update(update.id, values);
                 if (res.status === 200) {
                     handleClose()
                     if (getData) {
-                        getData()
-
+                      getData()  
                     }
-
                 }
-
             } else {
-                const res = await subCategory.create(values);
+                const res = await brandCategory.create(values);
                 if (res.status === 201) {
                     handleClose()
                     if (getData) {
                         getData()
-
                     }
-
+                
                 }
             }
         } catch (error) {
@@ -48,7 +44,7 @@ const Index = ({ open, onOk, handleClose, update, getData, categories, }:SubModa
 
     return (
         <Modal
-            title="Add New Category"
+            title="Add Brand Category"
             open={open}
             onOk={onOk}
             onCancel={handleClose}
@@ -56,7 +52,7 @@ const Index = ({ open, onOk, handleClose, update, getData, categories, }:SubModa
         >
             <Form
                 form={form}
-                name="category_form"
+                name="brand_category_form"
                 style={{
                     display: "flex",
                     flexDirection: "column",
@@ -64,38 +60,38 @@ const Index = ({ open, onOk, handleClose, update, getData, categories, }:SubModa
                 onFinish={onFinish}
             >
                 <Form.Item
-                    label=" Sub Category name"
+                    label=" Brand category name"
                     name="name"
                     labelCol={{ span: 24 }}
                     wrapperCol={{ span: 24 }}
-                    style={{ marginBottom: 8 }}
+                    style={{ marginBottom:8 }}
                     rules={[
                         {
                             required: true,
-                            message: 'Enter category name!',
+                            message: 'Enter brand category name!',
                         },
                     ]}
-                >  <Input className='h-10 border-[0.5px] px-3 ' />
+                >
+                    <Input className='h-10 p-3' />
                 </Form.Item>
 
                 <Form.Item
-                    name="parent_category_id"
-                    label="Parent Category"
+                    name="brand_id"
+                    label="Parent brand"
                     labelCol={{ span: 24 }}
                     wrapperCol={{ span: 24 }}
                     style={{ marginBottom: '8px' }}
                     rules={[
                         {
                             required: true,
-                            message: 'Enter category name!',
+                            message: 'Enter brand  name!',
                         },
                     ]}>
                     <Select
                         showSearch
-                        placeholder="Select a Category"
-                        className='h-10 border-[0.5px] rounded-lg '
+                        placeholder="Select a Brand"
                     >
-                        {categories?.map((item: any, index: number) => (
+                        {parentBrand?.map((item:any, index:number) => (
                             <Option value={parseInt(item.id)} key={index}>
                                 {item.name}
                             </Option>

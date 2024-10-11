@@ -12,6 +12,8 @@ import { ParamsType } from "@types";
 const Index = () => {
   const { id } = useParams();
   const parent_category_id = Number(id)
+  // console.log(parent_category_id);
+
   const [data, setData] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [update, setUpdate] = useState({});

@@ -160,7 +160,7 @@ const Index = () => {
       <div className="flex items-center justify-between py-4">
         <GlobalSearch updateParams={updateParams} placeholder={"Search Brands"} />
         <div className="flex gap-2 items-center ">
-          <Button type="primary" size="large" style={{ maxWidth: 160, minWidth: 20, backgroundColor: "orangered" }} onClick={showModal}>
+          <Button type="primary" size="large" style={{ maxWidth: 160, minWidth: 80, backgroundColor: "orangered", color: "white", height: 40 }} onClick={showModal}>
             Create
           </Button>
         </div>
