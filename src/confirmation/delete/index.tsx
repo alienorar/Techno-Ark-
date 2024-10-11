@@ -14,7 +14,9 @@ const PopconfirmDelete = ({ onConfirm, onCancel, id, title }: ConfirmType) => {
     const handleOk = () => {
         setConfirmLoading(true);
         setTimeout(() => {
-            onConfirm(id);
+           if (id) {
+               onConfirm(id);
+           }
             setOpen(false);
             setConfirmLoading(false);
         }, 1000);

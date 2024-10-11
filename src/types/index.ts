@@ -82,7 +82,7 @@ export interface CategoryType {
 export interface ConfirmType {
     onConfirm: (id: number) => void;
     onCancel: () => void,
-    id: number | undefined,
+    id: number|undefined ,
     title: string
 }
 
