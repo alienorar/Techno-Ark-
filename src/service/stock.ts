@@ -5,7 +5,7 @@ const stock:StockType = {
     get: (params) => https.get("/stock", { params }),
     update: (id, data) => https.patch(`/stock/update/${id}`, data),
     delete: (id) => https.delete(`/stock/delete/${id}`),
-    getBrands: () => https.get("/brand/search"),
+    // getBrands: () => https.get("/brand/search"),
     getCategory: () => https.get("/category/search"),
     getProduct: () => https.get("/products/search")
 };
