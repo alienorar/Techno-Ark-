@@ -39,7 +39,6 @@ const Index = ({ open, handleClose, update, getData, categories, }: ProductModal
 
     const getCategories = (evt: number) => {
         getBrand(evt)
-        console.log(evt, "ederftyj");
 
     }
     const getBrandCat = async (id: number) => {
@@ -61,7 +60,6 @@ const Index = ({ open, handleClose, update, getData, categories, }: ProductModal
     };
 
     const onFinish = async (values: ProductCreate) => {
-        // console.log('Received values of form: ', values);
         let formData: any = new FormData();
         formData.append("name", values?.name);
         formData.append("price", values?.price);
@@ -73,8 +71,6 @@ const Index = ({ open, handleClose, update, getData, categories, }: ProductModal
             if (update?.id) {
                 const res: any = await products.update(update.id, formData);
                 if (res.status === 200) {
-                    console.log(update);
-                    // notify(res.data.message)
                     handleClose()
                     if (getData) {
                         getData()
@@ -82,9 +78,7 @@ const Index = ({ open, handleClose, update, getData, categories, }: ProductModal
                 }
             } else {
                 const res: any = await products.create(formData);
-                console.log(formData);
                 if (res.status === 201) {
-                    // notify(res.data.message)
                     handleClose()
                     if (getData) {
                         getData()

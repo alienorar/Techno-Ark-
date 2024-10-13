@@ -76,7 +76,7 @@ export interface CategoryType {
     get: (params?: ParamsType) => Promise<any>,
     update: (id: UpdateType["id"], data: UpdateType["data"]) => Promise<any>,
     delete: (id: number | undefined) => Promise<number>,
-    getCategory:()=> Promise<any>
+    getCategory: () => Promise<any>
 }
 
 export interface ConfirmType {
@@ -209,10 +209,10 @@ export interface StockModalProps extends GlobalModalProps {
 export interface ProductCreate {
     name?: string,
     price?: string,
-    category_id?:string,
-    brand_id?:string,
-    brand_category_id?:string,
-    files?:any,
+    category_id?: string,
+    brand_id?: string,
+    brand_category_id?: string,
+    files?: any,
     id?: number,
 
 
@@ -222,17 +222,28 @@ export interface ProductType {
     get: (params: ParamsType) => Promise<ParamsType>,
     update: (id: number, data: ProductCreate) => Promise<ProductCreate>,
     delete: (id: number) => Promise<number>,
-    getById:(id:number) => Promise<number>,
-    getByBrand:(id:number) => Promise<number>,
+    getById: (id: number) => Promise<number>,
+    getByBrand: (id: number) => Promise<number>,
 
 }
 
-export interface ProductModalProps extends GlobalModalProps{
-   update?:ProductCreate,
-   categories?:any[]
+export interface ProductModalProps extends GlobalModalProps {
+    update?: ProductCreate,
+    categories?: any[]
 }
 
 
+// ============== Ads ============
+export interface AdsCreate {
+    position: number,
+    file: any
+}
+
+export interface AdsType {
+    create: (data: AdsCreate) => Promise<any>,
+    get: (params: ParamsType) => Promise<ParamsType>,
+    delete: (id: number) => Promise<number>,
+}
 
 
 

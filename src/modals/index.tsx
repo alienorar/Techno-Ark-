@@ -4,6 +4,7 @@ import Brand from './brand'
 import BrandCategory from './brand-category'
 import Stock from './stock'
 import Product from './product'
+import Ads from './ads'
 
 export{
     Category,
@@ -11,5 +12,6 @@ export{
     Brand,
     BrandCategory,
     Stock,
-    Product
+    Product,
+    Ads
 }
