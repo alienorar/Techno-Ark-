@@ -244,6 +244,11 @@ export interface AdsType {
     get: (params: ParamsType) => Promise<ParamsType>,
     delete: (id: number) => Promise<number>,
 }
+// ============== Settings ============
+ export interface SettingsType {
+    get:(id:number) => Promise<number>
+ }
+
 
 
 

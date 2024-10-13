@@ -6,5 +6,6 @@ import brandCategory from './brand-category'
 import stock from './stock'
 import products from './products'
 import ads from './ads'
+import settings from './settings'
 
-export{auth,category,subCategory,brand,brandCategory,stock,products,ads} 
+export{auth,category,subCategory,brand,brandCategory,stock,products,ads,settings} 
