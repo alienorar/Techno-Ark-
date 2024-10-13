@@ -1,4 +1,3 @@
-// import React, { ReactNode } from "react";
 
 import { AnyObject } from "antd/es/_util/type";
 import { TablePaginationConfig, ColumnsType } from "antd/es/table";
@@ -76,13 +75,14 @@ export interface CategoryType {
     create: (data: CategoryUpdate) => Promise<any>,
     get: (params?: ParamsType) => Promise<any>,
     update: (id: UpdateType["id"], data: UpdateType["data"]) => Promise<any>,
-    delete: (id: number | undefined) => Promise<number>
+    delete: (id: number | undefined) => Promise<number>,
+    getCategory:()=> Promise<any>
 }
 
 export interface ConfirmType {
     onConfirm: (id: number) => void;
     onCancel: () => void,
-    id: number|undefined ,
+    id: number | undefined,
     title: string
 }
 
@@ -144,7 +144,7 @@ export interface BrandType {
     get: (params: ParamsType) => Promise<any>,
     update: (id: number, data: BrandUpdate) => Promise<any>,
     delete: (id: number) => Promise<number>,
-    getBrands: (id: number) => Promise<number>
+    getBrandById: (id: number) => Promise<number>
 }
 
 export interface BrandModalProps extends GlobalModalProps {
@@ -158,7 +158,7 @@ export interface BrandModalProps extends GlobalModalProps {
 export interface BrandCategoryCreate {
     name?: string,
     brand_id?: number,
-    id?:number,
+    id?: number,
 }
 
 export interface BrandCategoryType {
@@ -167,14 +167,76 @@ export interface BrandCategoryType {
     update: (id: number, data: BrandCategoryCreate) => Promise<any>,
     delete: (id: number) => Promise<number>,
     getBrandCat: (id: number) => Promise<number>,
-    getBrands:()=>Promise<any>
+    getBrands: () => Promise<any>
 }
 
 
 export interface BrandCategoryModal extends GlobalModalProps {
-update?:BrandCategoryCreate,
-parentBrand:AnyObject,
+    update?: BrandCategoryCreate,
+    parentBrand: AnyObject,
 }
+
+// ============ Stock =============
+export interface StockCreate {
+    category_id?: number,
+    brand_id?: number,
+    product_id?: number,
+    quantity?: number,
+    id?: number,
+
+}
+
+export interface StockType {
+    create: (data: StockCreate) => Promise<any>,
+    get: (params: ParamsType) => Promise<any>,
+    update: (id: number, data: StockCreate) => Promise<any>,
+    delete: (id: number) => Promise<number>,
+    getCategory: () => Promise<any>,
+    getProduct: () => Promise<any>,
+
+}
+
+export interface StockModalProps extends GlobalModalProps {
+    update?: StockCreate,
+    categories?: any,
+    products?: any,
+
+}
+
+
+
+// =============Product =============
+export interface ProductCreate {
+    name?: string,
+    price?: string,
+    category_id?:string,
+    brand_id?:string,
+    brand_category_id?:string,
+    files?:any,
+    id?: number,
+
+
+}
+export interface ProductType {
+    create: (data: ProductCreate) => Promise<any>,
+    get: (params: ParamsType) => Promise<ParamsType>,
+    update: (id: number, data: ProductCreate) => Promise<ProductCreate>,
+    delete: (id: number) => Promise<number>,
+    getById:(id:number) => Promise<number>
+
+}
+
+export interface ProductModalProps extends GlobalModalProps{
+   update?:ProductCreate,
+   categories?:any[]
+}
+
+
+
+
+
+
+
 
 // export interface ModalPropstype {
 //     open: boolean;
