@@ -18,6 +18,7 @@ import {
     Stock,
     NotFound,
     Settings,
+    ProductDetails
 } from '@pages';
 import { Suspense } from "react";
 
@@ -30,7 +31,7 @@ const Index = () => {
                     <Route path="/sign-in" element={<SignIn />} />
                     <Route path="admin-panel" element={<AdminPanel />}>
                         <Route index element={<Products />} />
-                        {/* <Route path="product-details/:id" element={<ProductDetails />} /> */}
+                        <Route path="product-details/:id" element={<ProductDetails />} />
                         <Route path="categories" element={<Categories />} />
                         <Route path="categories/:id" element={<SubCategories />} />
                         <Route path="brands" element={<Brands />} />
