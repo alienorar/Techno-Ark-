@@ -1,11 +1,12 @@
 import { Modal, Form, Input, Button, Select, } from 'antd';
 import { useState, useEffect } from 'react';
-import { stock } from '@service';
+import { brand, products, stock } from '@service';
 import { StockCreate, StockModalProps } from '@types';
 
-const Stock = ({ open, onOk, handleClose, getData, categories, products, update }: StockModalProps) => {
+const Stock = ({ open, onOk, handleClose, getData, categories, update }: StockModalProps) => {
     const [form] = Form.useForm();
     const [filteredBrands, setFilteredBrands] = useState([])
+    const [fetchedProducts, setFetchedProducts] = useState([]);
     useEffect(() => {
         if (update?.id) {
             form.setFieldsValue({
@@ -20,19 +21,34 @@ const Stock = ({ open, onOk, handleClose, getData, categories, products, update 
     }, [update, form]);
 
     // =========== Filter data ==========
-    const handleChange = async (value: number, inputName: string) => {
+    const getBrands = async (id: number) => {
         try {
-            if (inputName === "category_id") {
-                const res: any = await stock.getBrands(value)
-                setFilteredBrands(res?.data?.data?.brands)
-            }
+            const res: any = await brand.getBrandById(id)
+            setFilteredBrands(res?.data?.data?.brands)
         } catch (error) {
-            console.log(error);
 
         }
-    };
+    }
+    const getProducts = async (id: number) => {
+        try {
+            const res: any = await products.getByBrand(id)
+            setFetchedProducts(res?.data?.data)
+            console.log(res?.data?.data);
 
+        } catch (error) {
+            console.log("error");
 
+        }
+    }
+
+    const handleChange = async (evt: number) => {
+        getBrands(evt)
+    }
+    const handleBrandChange = async (evt: number) => {
+        getProducts(evt)
+        console.log(evt);
+
+    }
 
     const onFinish = async (values: StockCreate) => {
         values.quantity = Number(values.quantity)
@@ -98,7 +114,7 @@ const Stock = ({ open, onOk, handleClose, getData, categories, products, update 
                     <Select
                         showSearch
                         className='h-10 border-[1.5px] rounded-lg'
-                        onChange={(value) => handleChange(value, "category_id")}
+                        onChange={(value) => handleChange(value)}
 
                     >
                         {categories?.map((item: any, index: number) => (
@@ -120,7 +136,7 @@ const Stock = ({ open, onOk, handleClose, getData, categories, products, update 
                 >
                     <Select
                         className='h-10 border-[1.5px] rounded-lg'
-                        onChange={(value) => handleChange(value, "brand_id")}
+                        onChange={(value) => handleBrandChange(value,)}
                     >
                         {filteredBrands?.map((item: any, index: number) => (
                             <option value={item.id} key={index}>
@@ -140,10 +156,9 @@ const Stock = ({ open, onOk, handleClose, getData, categories, products, update 
                     ]}
                 >
                     <Select
-                        onChange={(value) => handleChange(value, "brand_category_id")}
                         className='h-10 border-[1.5px] rounded-lg'
                     >
-                        {products?.map((item: any, index: number) => (
+                        {fetchedProducts?.map((item: any, index: number) => (
                             <option value={item.id} key={index}>
                                 {item.name}
                             </option>

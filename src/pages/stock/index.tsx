@@ -15,7 +15,6 @@ const Index = () => {
   const [update, setUpdate] = useState({});
   const [total, setTotal] = useState();
   const [categories, setCategories] = useState([]);
-  const [fetchedProducts, setFetchedProducts] = useState([]);
   const { search } = useLocation()
   const navigate = useNavigate()
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -125,21 +124,7 @@ const Index = () => {
     getCategories();
   }, [params]);
 
-  //========= get products  ============
-  const getProducts = async () => {
-    try {
-      const res = await stock.getProduct();
-      const fetchedData = res?.data?.data?.products;
-      setFetchedProducts(fetchedData);
-
-    } catch (error) {
-
-    }
-  };
-
-  useEffect(() => {
-    getProducts();
-  }, [params]);
+  
 
   const columns = [
     {
@@ -180,7 +165,7 @@ const Index = () => {
         getData={getData}
         update={update}
         categories={categories}
-        products={fetchedProducts}
+
       />
       <div className="flex items-center justify-between py-4">
         <GlobalSearch updateParams={updateParams} placeholder={"Search Stocks"} />

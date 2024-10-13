@@ -222,7 +222,8 @@ export interface ProductType {
     get: (params: ParamsType) => Promise<ParamsType>,
     update: (id: number, data: ProductCreate) => Promise<ProductCreate>,
     delete: (id: number) => Promise<number>,
-    getById:(id:number) => Promise<number>
+    getById:(id:number) => Promise<number>,
+    getByBrand:(id:number) => Promise<number>,
 
 }
 
